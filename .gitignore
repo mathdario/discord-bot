@@ -1,0 +1,53 @@
+# Compiled files
+*.class
+*.o
+*.pyc
+
+# Logs and databases
+*.log
+*.sqlite
+*.db
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Binary files and archives
+*.zip
+*.rar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Dependency directories
+/node_modules/
+/vendor/
+
+# Build output
+/build/
+/dist/
+
+# Environment configuration
+.env
+
+# Compiled executables
+/bin/
+/exe/
+
+# Miscellaneous
+.sass-cache/
+.npm/
+.bower/
+.cache/
