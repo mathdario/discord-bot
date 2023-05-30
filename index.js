@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits } = require("discord.js");
+const { Client, Events, GatewayIntentBits, Collection } = require("discord.js");
 
 //dotenv
 const dotenv = require("dotenv");
@@ -14,17 +14,28 @@ const commandFiles = fs
   .readdirSync(commandsPath)
   .filter((file) => file.endsWith(".js"));
 
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+client.commands = new Collection();
+
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
-  const commands = require(filePath);
+  const command = require(filePath);
+
+  if ("data" in command && "execute" in command) {
+    client.commands.set(command.data.name, command);
+  } else {
+    console.log(
+      `Esse comando em ${filePath} está com "data" ou "execute" ausentes`
+    );
+  }
 }
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+console.log(client.commands);
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
+  console.log(`Login realizado com ${c.user.tag}`);
 });
 
 // Log in to Discord with your client's token
